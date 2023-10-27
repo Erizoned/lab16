@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Информация о пользователе:</h1>
+    <table style="border-style: solid;" border="1">
+        <tr>
+            <th colspan="3">Информация о пользователе</th>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+        </tr>
+        <tr>
+            <td id="name"></td>
+            <td id="age"></td>
+            <td id="email"></td>
+        </tr>
+    </table>
+    <hr>
+    <h1>Автомобиль:</h1>
+    <p>Скорость автомобиля: </p>
+    <input type="text" id="ashasskoka" value="0">
+    <p> Введите скорость: </p>
+    <input type="number" id="skokavashe">
+    <button onclick="speed_up()"> Увеличить скорость</button>
+    <hr>
+    <h1>Банк:</h1>
+    <h3>Пополнить Счёт: </h3>
+    <input type="text" id="dobavitdeneg"> <button onclick="mani_up()">Подтвердить</button>
+    <h3>Снять деньги: </h3>
+    <input type="text" id="ubratdeneg"> <button onclick="mani_down()">Подтвердить</button>
+    <h3> Проверить счёт: </h3>
+    <button onclick="checkmani()">Проверка</button>
+    <p id="skokadeneg"> </p>    
+    <hr>
+    <h1>Генератор почты: </h1>
+    <h3>Введите имя:</h3>
+    <input type="text" id="firstName">
+    <h3>Введите Фамилию: </h3>
+    <input type="text" id="LastName">
+    <h3>Введите домен: </h3>
+    <input type="text" id="domen"> <br> <br>
+    <button onclick="final()">Создать email</button>
+    <p id="s"></p>
+    <div id="chetam" style="display: none;">
+        <h3>Проверить полученную почту: </h3>
+        <button onclick="check()">Проверка</button>
+        <p id="nuda"></p>
+    </div>
+    <script>
+        const user = {
+            name: 'Anton',
+            age: 17,
+            email: 'erizoned@gmail.com'
+        }
+        document.getElementById("name").textContent = user.name;
+        document.getElementById("age").textContent = user.age;
+        document.getElementById("email").textContent = user.email;
+        const car = {
+            mark: 'Tagircar',
+            speed: 0
+        }
+        const email = {
+            ima: '',
+            famila: '',
+            domila: ''
+        }
+        function speed_up(){
+            car.speed = parseFloat(car.speed) +  parseFloat(document.getElementById("skokavashe").value);
+            document.getElementById("ashasskoka").value = car.speed;
+        }
+        const bank = {
+            mani:0
+        }
+        function mani_up(){
+            bank.mani = parseFloat(bank.mani) +  parseFloat(document.getElementById("dobavitdeneg").value);
+            document.getElementById("dobavitdeneg").value = '';
+        }
+        function checkmani(){
+            document.getElementById("skokadeneg").textContent = bank.mani;
+        }
+        function mani_down(){
+            bank.mani = parseFloat(bank.mani) -  parseFloat(document.getElementById("ubratdeneg").value);
+            document.getElementById("ubratdeneg").value = '';
+        }
+        function final(){
+            email.ima = document.getElementById("firstName").value;
+            email.famila = document.getElementById("LastName").value;
+            email.domila = document.getElementById("domen").value;
+            mail = email.ima + '-' + email.famila + '@' + email.domila;
+            document.getElementById("s").textContent = mail;
+            document.getElementById("chetam").style.display = "block";
+        }
+        function check(){
+            var kaknado = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            var mail = document.getElementById("s").textContent;
+            if(kaknado.test(mail)){
+                document.getElementById("nuda").innerHTML = "Всё норм";
+            }
+            else{
+                document.getElementById("nuda").innerHTML = "Всё плохо";
+            }
+        }
+    </script>
+</body>
+</html>
